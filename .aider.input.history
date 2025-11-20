@@ -20,3 +20,9 @@
 
 # 2025-11-20 22:39:36.641126
 +The buttons should be able to press In that order that they light up, even if they manage to shut down before pressing. Create an actual colourded buttons.
+
+# 2025-11-20 22:59:33.597795
++Light up the whole button and erase text from the buttons. The game ends only if the buttons are pressed In the wrong order.
+
+# 2025-11-20 22:59:33.598159
++Light up the whole button and erase text from the buttons. The game ends only if the buttons are pressed In the wrong order.
