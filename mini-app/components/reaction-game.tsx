@@ -8,6 +8,7 @@ type Color = typeof COLORS[number];
 
 export default function ReactionGame() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [lastActiveIndex, setLastActiveIndex] = useState<number | null>(null);
   const [counter, setCounter] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -17,12 +18,10 @@ export default function ReactionGame() {
     if (gameOver) return;
     const next = Math.floor(Math.random() * COLORS.length);
     setActiveIndex(next);
-    // Light up for 1 second
+    setLastActiveIndex(next);
     timeoutRef.current = setTimeout(() => {
       setActiveIndex(null);
-      // Wait for user response for 1.5 seconds
       responseTimerRef.current = setTimeout(() => {
-        // Timeout -> game over
         setGameOver(true);
       }, 1500);
     }, 1000);
@@ -31,7 +30,7 @@ export default function ReactionGame() {
   const handleClick = (index: number) => {
     if (gameOver) return;
     if (responseTimerRef.current) clearTimeout(responseTimerRef.current);
-    if (index === activeIndex) {
+    if (index === lastActiveIndex) {
       setCounter((c) => c + 1);
       startRound();
     } else {
@@ -55,7 +54,15 @@ export default function ReactionGame() {
           <Button
             key={color}
             variant={activeIndex === idx ? "default" : "outline"}
-            className={`w-16 h-16 ${color}`}
+            className={`w-16 h-16 ${
+              color === "red"
+                ? "bg-red-500"
+                : color === "green"
+                ? "bg-green-500"
+                : color === "blue"
+                ? "bg-blue-500"
+                : "bg-yellow-500"
+            } ${activeIndex === idx ? "ring-4 ring-white" : ""}`}
             onClick={() => handleClick(idx)}
           >
             {color}
