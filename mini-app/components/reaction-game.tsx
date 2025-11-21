@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 const COLORS = ["blue", "red", "green", "yellow"] as const;
@@ -12,7 +12,6 @@ export default function ReactionGame() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [counter, setCounter] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const addNext = () => {
     const next = Math.floor(Math.random() * COLORS.length);
@@ -63,7 +62,13 @@ export default function ReactionGame() {
             variant={activeIndex === idx ? "default" : "outline"}
             className={`w-20 h-20 bg-${color}-500 ${activeIndex === idx ? "ring-4 ring-white" : ""}`}
             onClick={() => handleClick(idx)}
-          />
+          >
+            <img
+              src={`/bored-ape-${idx + 1}.png`}
+              alt={`Bored Ape ${idx + 1}`}
+              className="w-full h-full object-cover"
+            />
+          </Button>
         ))}
       </div>
       {gameOver && (
