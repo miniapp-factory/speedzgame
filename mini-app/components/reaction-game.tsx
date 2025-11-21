@@ -60,7 +60,7 @@ export default function ReactionGame() {
           <Button
             key={color}
             variant={activeIndex === idx ? "default" : "outline"}
-            className={`w-20 h-20 bg-${color}-500 ${activeIndex === idx ? "ring-4 ring-white animate-pulse" : ""}`}
+            className={`w-20 h-20 bg-${color}-500 ${activeIndex === idx ? "ring-4 ring-red-500 animate-pulse" : ""}`}
             onClick={() => handleClick(idx)}
           >
             <img
