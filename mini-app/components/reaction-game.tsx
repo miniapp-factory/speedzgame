@@ -11,7 +11,6 @@ export default function ReactionGame() {
   const [counter, setCounter] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const responseTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const startRound = () => {
     if (gameOver) return;
@@ -19,15 +18,11 @@ export default function ReactionGame() {
     setActiveIndex(next);
     timeoutRef.current = setTimeout(() => {
       setActiveIndex(null);
-      responseTimerRef.current = setTimeout(() => {
-        setGameOver(true);
-      }, 1500);
     }, 1000);
   };
 
   const handleClick = (index: number) => {
     if (gameOver) return;
-    if (responseTimerRef.current) clearTimeout(responseTimerRef.current);
     if (index === activeIndex) {
       setCounter((c) => c + 1);
       startRound();
