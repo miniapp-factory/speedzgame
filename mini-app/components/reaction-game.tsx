@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 
-const COLORS = ["red", "green", "blue", "yellow"] as const;
+const COLORS = ["blue", "red", "yellow", "green"] as const;
 type Color = typeof COLORS[number];
 
 export default function ReactionGame() {
