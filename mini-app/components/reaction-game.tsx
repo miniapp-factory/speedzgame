@@ -35,7 +35,6 @@ export default function ReactionGame() {
     startRound();
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      if (responseTimerRef.current) clearTimeout(responseTimerRef.current);
     };
   }, []);
 
