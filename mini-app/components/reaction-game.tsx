@@ -20,29 +20,26 @@ export default function ReactionGame() {
     setGameOver(false);
   };
 
-  // Light up buttons in order
+  // Light up buttons in order with adaptive speed
   useEffect(() => {
     if (sequence.length === 0) return;
+    const delay = Math.max(800 - score * 100, 300);
     const timer = setTimeout(() => {
       setActiveButton(sequence[currentIndex]);
-      const next = currentIndex + 1;
-      if (next < sequence.length) {
-        setCurrentIndex(next);
-      } else {
-        // finished showing sequence
-        setActiveButton(null);
-      }
-    }, 800);
+    }, delay);
     return () => clearTimeout(timer);
-  }, [currentIndex, sequence]);
+  }, [currentIndex, sequence, score]);
 
   const handleClick = (idx: number) => {
-    if (gameOver || activeButton !== null) return;
+    if (gameOver || activeButton === null) return;
     if (idx === sequence[score]) {
       setScore((s) => s + 1);
+      setActiveButton(null);
       if (score + 1 === sequence.length) {
         // player completed the sequence
         setGameOver(true);
+      } else {
+        setCurrentIndex((c) => c + 1);
       }
     } else {
       setGameOver(true);
